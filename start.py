@@ -37,7 +37,7 @@ class Ball:
 		self.show()
 	
 	def show(self):
-		pygame.draw.circle(self.screen, self.color, (self.posX, self.posY), self.radius)
+		pygame.draw.circle(self.screen, self.color, (int(self.posX), int(self.posY)), int(self.radius))
 
 	def start_moving(self):
 		number = round(random.uniform(0, 1))
@@ -51,9 +51,15 @@ class Ball:
 	
 	def move(self, dt):
 		self.posX += self.dx * dt
-		self.dx = self.dx * 1.0001 
+		if self.dx < 0:
+			self.dx = self.dx - 25 * dt
+		elif self.dx > 0:
+			self.dx = self.dx + 25 * dt
 		self.posY += self.dy * dt
-		self.dy = self.dy * 1.0001
+		if self.dy < 0:
+			self.dy = self.dy - 25 * dt
+		elif self.dy > 0:
+			self.dy = self.dy + 25 * dt
 
 	def paddle_collision(self):
 		self.dx = self.dx * -1
