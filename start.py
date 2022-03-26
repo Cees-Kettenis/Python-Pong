@@ -3,6 +3,7 @@ from turtle import width
 from pygame.locals import *
 
 pygame.init()
+pygame.mouse.set_visible(0)
 
 #----------
 # CONSTANTS
@@ -51,21 +52,22 @@ class Ball:
 	
 	def move(self, dt):
 		self.posX += self.dx * dt
-		if self.dx < 0:
-			self.dx = self.dx - 25 * dt
-		elif self.dx > 0:
-			self.dx = self.dx + 25 * dt
 		self.posY += self.dy * dt
-		if self.dy < 0:
-			self.dy = self.dy - 25 * dt
-		elif self.dy > 0:
-			self.dy = self.dy + 25 * dt
+
 
 	def paddle_collision(self):
 		self.dx = self.dx * -1
+		if self.dx < 0:
+			self.dx = self.dx - 25
+		elif self.dx > 0:
+			self.dx = self.dx + 25
 
 	def wall_collision(self):
 		self.dy = self.dy * -1
+		if self.dy < 0:
+			self.dy = self.dy - 25 
+		elif self.dy > 0:
+			self.dy = self.dy + 25
 
 	def restart_pos(self):
 		self.posX = WIDTH//2
